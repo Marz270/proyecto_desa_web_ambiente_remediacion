@@ -1,0 +1,145 @@
+<div 
+  class="form-image"
+  >
+  <div class="form-format">
+    <div class="form-container mx-auto w-full max-w-xs sm:max-w-md z-5 relative overflow-y-auto">
+      <h2 class="form-heading">Create your account</h2>
+
+      <form
+        [formGroup]="validateRegister"
+        class="mt-5"
+        (ngSubmit)="this.onSubmitRegister()"
+      >
+        <!-- Nombre -->
+        <div>
+          <label for="name" class="form-label">Name</label>
+          <div class="mb-5 h-[46px]">
+            <ion-input
+              formControlName="name"
+              id="name"
+              name="name"
+              type="text"
+              required=""
+              [ngClass]="{'border-red-500': validateRegister.get('name')?.invalid && validateRegister.get('name')?.touched}"
+              class="form-input"
+            ></ion-input>
+            <div *ngIf="validateRegister.get('name')?.invalid && validateRegister.get('name')?.touched">
+              <small class="form-error">
+                {{ validateRegister.get('name')?.errors?.['nameError'] }}
+              </small>
+            </div>
+          </div>
+        </div>
+
+        <!-- Apellido -->
+        <div>
+          <label for="lastname" class="form-label">Last Name</label>
+          <div class="mb-5 h-[46px]">
+            <ion-input
+              formControlName="lastname"
+              id="lastname"
+              name="lastname"
+              type="text"
+              required=""
+              [ngClass]="{'border-red-500': validateRegister.get('lastname')?.invalid && validateRegister.get('lastname')?.touched}"
+              class="form-input"
+            ></ion-input>
+            <div *ngIf="validateRegister.get('lastname')?.invalid && validateRegister.get('lastname')?.touched">
+              <small class="form-error">
+                {{ validateRegister.get('lastname')?.errors?.['lastnameError'] }}
+              </small>
+            </div>
+          </div>
+        </div>
+
+        <!-- Email -->
+        <div>
+          <label for="email" class="form-label">Email Address</label>
+          <div class="mb-5 h-[46px]">
+            <ion-input
+              formControlName="email"
+              id="email"
+              name="email"
+              type="email"
+              autocomplete="email"
+              required=""
+              [ngClass]="{'border-red-500': validateRegister.get('email')?.invalid && validateRegister.get('email')?.touched}"
+              class="form-input"
+            ></ion-input>
+            <div *ngIf="validateRegister.get('email')?.invalid && validateRegister.get('email')?.touched">
+              <small class="form-error">
+                {{ validateRegister.get('email')?.errors?.['emailError'] }}
+              </small>
+            </div>
+          </div>
+        </div>
+
+        <!-- Contraseña -->
+        <div>
+          <label for="password" class="form-label">Password</label>
+          <div class="mb-5 h-[55px]">
+            <ion-input
+              formControlName="password"
+              id="password"
+              name="password"
+              type="password"
+              required=""
+              [ngClass]="{'border-red-500': validateRegister.get('password')?.invalid && validateRegister.get('password')?.touched}"
+              class="form-input"
+            ></ion-input>
+            <div *ngIf="validateRegister.get('password')?.errors && validateRegister.get('password')?.touched" class="max-h-7 overflow-y-auto">
+              <div class="form-error" *ngFor="let error of getPasswordErrors()">
+                {{ error }}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Confirmar Contraseña -->
+        <div>
+          <label 
+            for="confirmPassword" 
+            class="form-label">Confirm password
+          </label>
+          <div class="mb-5 h-[50px]">
+            <ion-input
+              formControlName="confirmPassword"
+              id="confirmPassword"
+              name="confirmPassword"
+              type="password"
+              required=""
+              [ngClass]="{'border-red-500': validateRegister.get('confirmPassword')?.invalid && validateRegister.get('confirmPassword')?.touched}"
+              class="form-input"
+            ></ion-input>
+            <div *ngIf="validateRegister.get('confirmPassword')?.invalid && validateRegister.get('confirmPassword')?.touched">
+              <small class="form-error">La contraseña confirmada es requerida.</small>
+              <small
+                class="form-error"
+                *ngIf="validateRegister.get('confirmPassword')?.errors?.['repeatPasswordError']"
+              >
+                {{ validateRegister.get('confirmPassword')?.errors?.['repeatPasswordError'] }}
+              </small>
+            </div>
+          </div>
+        </div>
+
+        <!-- Botón de registro -->
+        <div class="mt-2">
+          <button type="submit" class="form-button">Create account</button>
+        </div>
+
+        <!-- Botón de cancelar -->
+        <div class="mt-2">
+          <button type="button" class="form-button" (click)="onCancel()">Cancel</button>
+        </div>
+
+        <div class="text-center mt-2">
+          <p class="text-sm text-[#386150]">
+            Already have an account?
+            <a href="/login" class="form-link"><u>Sign in here</u></a>
+          </p>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

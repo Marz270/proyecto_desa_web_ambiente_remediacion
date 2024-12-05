@@ -1,0 +1,87 @@
+name: proyecto_desa_web
+services:
+
+  backend-proyecto:
+    image: backend
+    container_name: backend-proyecto
+    build:
+      context: ./backend
+    command: sh -c "npm install && npm run dev"
+    volumes:
+      - ./backend:/backend
+    environment:
+      - PGDATABASE=${PGDATABASE}
+      - PGUSER=${PGUSER}
+      - PGPASSWORD=${PGPASSWORD}
+      - PGHOST=${PGHOST}
+      - FRONTEND_URL=${FRONTEND_URL}
+      - GOOGLE_CLIENT_ID=${GOOGLE_CLIENT_ID}
+      - GOOGLE_CLIENT_SECRET=${GOOGLE_CLIENT_SECRET}
+
+  frontend-proyecto:
+    image: frontend
+    container_name: frontend-proyecto
+    command: sh -c "npm install && npm start"
+    build:
+      context: ./frontend
+    volumes:
+      - ./frontend/:/frontend
+
+  database-proyecto:
+    image: database
+    container_name: database-proyecto
+    build:
+      context: ./database
+    environment:
+      - POSTGRES_DB=${PGDATABASE}
+      - POSTGRES_USER=${PGUSER}
+      - POSTGRES_PASSWORD=${PGPASSWORD}
+    ports:
+      - 5436:5432
+
+  # Ahora hacemos el contenedor de data-source
+  data-source-proyecto:
+      image: data-source
+      container_name: data-source-proyecto
+      build:
+        context: ./data-source
+      command: sh -c "npm install && npm run dev"
+      volumes:
+        - ./data-source:/data-source
+      environment:
+        - PGDATABASE=${PGDATABASE}
+        - PGUSER=${PGUSER}
+        - PGPASSWORD=${PGPASSWORD}
+        - PGHOST=${PGHOST}
+      depends_on:
+      - database-proyecto
+      - mongodb
+
+  proxy-proyecto:
+    image: proxy
+    container_name: proxy-proyecto
+    build: ./proxy
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./certs:/etc/nginx/certs
+    depends_on:
+      - frontend-proyecto
+      - backend-proyecto
+      - database-proyecto
+      - data-source-proyecto
+    environment:
+      - FRONTEND_PORT=${FRONTEND_PORT}
+      - FRONTEND_URL=${FRONTEND_URL}
+
+  mongodb:
+    container_name: mongodb
+    ports:
+      - "2717:27017"
+    image: mongo:latest
+    environment:
+      - MONGODB_USER="admin"
+      - MONGODB_PASS="admin"
+    volumes:
+      - ./mongodb-data:/data/db

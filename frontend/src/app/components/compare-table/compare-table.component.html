@@ -1,0 +1,74 @@
+<ion-grid class="max-w-screen-md">
+  <ion-row class="justify-center">
+    <!-- Tarjetas de propiedades -->
+    <ion-col
+      size="12"
+      size-md="4.5"
+      *ngFor="let compareItem of itemList; let i = index"
+      class="p-2"
+    >
+      <ion-card class= "bg-white shadow-lg rounded-lg overflow-hidden 
+        flex flex-col h-full group w-full max-w-xs">
+        <div class="relative w-full h-32">
+          <ion-img
+            [src]="compareItem.property.main_img_url"
+            alt="{{ compareItem.property.title }}"
+            class="w-full h-full object-cover"
+          ></ion-img>
+          <div class="absolute top-4 left-0 right-0 flex justify-between px-4">
+            <!-- Botón Favorite -->
+            <button
+              class="bg-black bg-opacity-50 text-amber-400 rounded-full p-2 opacity-100 
+                lg:opacity-0 group-hover:opacity-100 transition-opacity"
+              (click)="toggleFavorite(compareItem.property)"
+            >
+              <ion-icon
+                [name]="
+                  isFavorite(compareItem.property) ? 'star' : 'star-outline'
+                "
+                class="text-2xl"
+              ></ion-icon>
+            </button>
+          </div>
+        </div>
+
+        <ion-card-header>
+          <ion-card-title class="text-xl font-bold text-gray-800 h-12">{{
+            compareItem.property.title
+          }}
+          </ion-card-title>
+        </ion-card-header>
+
+        <ion-card-content class="text-sm">
+          <p><strong>Precio:</strong> ${{ compareItem.property.price }}</p>
+          <p><strong>Ubicación:</strong> {{ compareItem.property.departamento }}, {{compareItem.property.barrio}}</p>
+          <p>
+            <strong>Habitaciones:</strong>
+            {{ compareItem.property.number_of_rooms }}
+          </p>
+          <p>
+            <strong>Baños:</strong>
+            {{ compareItem.property.number_of_bathrooms }}
+          </p>
+          <!-- Botones de acción en las tarjetas -->
+          <ion-button
+            fill="clear"
+            color="danger"
+            (click)="removeProperty(compareItem)"
+            class="text-sm"
+          >
+            <ion-icon name="trash"></ion-icon>
+          </ion-button>
+          <ion-button
+            fill="clear"
+            color="primary"
+            (click)="viewDetails(compareItem)"
+            class="text-sm"
+          >
+            <ion-icon name="eye"></ion-icon>
+          </ion-button>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+</ion-grid>

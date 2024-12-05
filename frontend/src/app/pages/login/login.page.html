@@ -1,0 +1,99 @@
+<div
+  class="form-image"
+>
+  <div
+    class="form-format"
+  >
+    <div class="mt-8 mx-auto w-full max-w-md z-10 relative">
+      <div class="form-container">
+        <h2 class="form-heading">Sign in to your account</h2>
+
+        <form class="mt-8 space-y-6" (ngSubmit)="this.onSubmitLogin()">
+          <!-- Email -->
+          <div>
+            <label for="email" class="form-label">Email address</label>
+            <div class="mt-1">
+              <ion-input
+                [(ngModel)]="this.email"
+                id="email"
+                name="email"
+                type="email"
+                autocomplete="email"
+                required=""
+                class="form-input"
+              ></ion-input>
+            </div>
+          </div>
+
+          <!-- Contraseña -->
+          <div>
+            <label for="password" class="form-label">Password</label>
+            <div class="mt-1">
+              <ion-input
+                [(ngModel)]="this.password"
+                id="password"
+                name="password"
+                type="password"
+                autocomplete="current-password"
+                required=""
+                class="form-input"
+              ></ion-input>
+            </div>
+          </div>
+
+          <div class="flex flex-wrap items-center justify-between sm:flex-nowrap">
+            <div class="flex items-center">
+              <ion-checkbox
+                id="remember_me"
+                name="remember_me"
+                type="checkbox"
+                class="ml-1 sm:ml-4"
+              />
+              <ion-label
+                for="remember_me"
+                class="ml-1 sm:ml-2 block text-sm text-[#557665]"
+              >
+                Remember me
+              </ion-label>
+            </div>
+
+            <div class="text-sm mt-2 sm:mt-0">
+              <a
+                href="#"
+                class="mr-4 font-medium text-[#386150] hover:text-[#8ABFA3]"
+              >
+                Forgot your password?
+              </a>
+            </div>
+          </div>
+
+          <div>
+            <button
+              type="submit"
+              class="form-button"
+            >
+              Sign in
+            </button>
+            <div class="mt-4 flex justify-center">
+              <button
+                type="button"
+                mat-raised-button
+                (click)="signInWithGoogle()"
+                class="flex items-center justify-center border border-transparent 
+                bg-white py-2 px-4 text-sm font-medium text-gray-900 shadow-sm hover:bg-gray-100 
+                focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 rounded-lg"
+              >
+                <img
+                  src="https://cdn1.iconfinder.com/data/icons/google-s-logo/150/Google_Icons-09-512.png"
+                  alt="Google"
+                  class="h-5 w-5 mr-2"
+                />
+                Sign in with Google
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

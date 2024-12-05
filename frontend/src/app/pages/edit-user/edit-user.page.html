@@ -1,0 +1,10 @@
+<div class="h-screen mt-14 pb-14">
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>Editar Usuario</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  
+  <app-user-form (userUpdated)="onUserUpdated($event)" (canceled)="onCanceled()">
+  </app-user-form>  
+</div>
