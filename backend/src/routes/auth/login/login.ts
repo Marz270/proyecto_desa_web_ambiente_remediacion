@@ -23,7 +23,7 @@ const authRoute: FastifyPluginAsync = async (fastify, opts): Promise<void> => {
         password: string;
       };
       const res = await query(
-        `select id, email, password, name, lastname, role from users where email = '${email}'`
+        `select id, email, password, name, lastname, role, city from users where email = '${email}'`
       );
       if (res.rows.length === 0) {
         reply.code(404).send({ message: "Usuario no encontrado" });
@@ -44,6 +44,7 @@ const authRoute: FastifyPluginAsync = async (fastify, opts): Promise<void> => {
           name: user.name,
           lastname: user.lastname,
           role: user.role,
+          city: user.city
         },
       });
     },

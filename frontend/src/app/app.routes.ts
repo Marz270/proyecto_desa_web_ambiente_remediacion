@@ -14,6 +14,7 @@ import {EditUserPage} from './pages/edit-user/edit-user.page';
 import {isAdminOrSelfGuard} from './guards/is-admin-or-self.guard';
 import { isAdminOrUserGuard } from './guards/is-admin-or-user.guard';
 import { PropertiesPage } from './pages/properties/properties.page';
+import { Publicaciones2Page } from './pages/publicaciones2/publicaciones2.page';
 
 export const routes: Routes = [
   {
@@ -32,6 +33,10 @@ export const routes: Routes = [
   {
     path: 'all-properties',
     component: AllPropertiesPage,
+  },
+  {
+    path: 'publicaciones2',
+    component: Publicaciones2Page,
   },
   {
     path: 'property-view/:id',

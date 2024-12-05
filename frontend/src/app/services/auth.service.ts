@@ -59,6 +59,15 @@ export class AuthService {
     return false;
   }
 
+  getCity(): string {
+    const user = localStorage.getItem('user');
+    if (user) {
+      const { city } = JSON.parse(user);
+      return city;
+    }
+    return '';
+  }
+
   getUser() {
     return JSON.parse(localStorage.getItem('user') || '{}');
   }

@@ -10,6 +10,7 @@ export const UserSchema = Type.Object({
     email: Type.String({ type: 'string', format: 'email' }),
     registration_date: Type.String({ format: 'date-time' }),
     role: Type.Union([Type.Literal("admin"), Type.Literal("user")]),
+    city: Type.String({ minLength: 2, maxLength: 50 })
 });
 
 export const UserPostSchema = Type.Object({
@@ -18,6 +19,7 @@ export const UserPostSchema = Type.Object({
     email: Type.String({format: 'email'}),
     password: Type.String({pattern: passwordPattern.source}),
     role:Type.Union([Type.Literal("admin"), Type.Literal("user")]),
+    city:Type.String({minLength: 2, maxLength: 50})
 });
 
 export const UserPutSchema = Type.Object({
@@ -26,6 +28,7 @@ export const UserPutSchema = Type.Object({
     email: Type.Optional(Type.String({format: 'email'})),
     password: Type.Optional(Type.String({pattern: passwordPattern.source})),
     role: Type.Optional(Type.Union([Type.Literal("admin"), Type.Literal("user")])),
+    city: Type.Optional(Type.String({minLength: 2, maxLength: 50}))
 });
 
 export const UserIdSchema = Type.Object({

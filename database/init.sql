@@ -9,7 +9,8 @@ CREATE table if not exists users (
     email text not null unique,
     password text not null,
     role varchar(10) check (role in ('admin', 'user')) not null,
-    registration_date timestamp default now() not null
+    registration_date timestamp default now() not null,
+    city text not null
 );
 
 CREATE table if not exists properties (
@@ -54,13 +55,13 @@ CREATE TABLE IF NOT EXISTS data_source (
     url VARCHAR(255) NOT NULL
 );
 
-insert into users (name, lastname, email, password, role)
-    values('Nicolás', 'Márquez', 'nicomars270@gmail.com', crypt('27DEenero2003_', gen_salt('bf')), 'admin'),
-          ('Martina', 'Guzmán', 'martina14288@gmail.com', crypt('28DEenero2003_', gen_salt('bf')), 'admin'),
-          ('Ana', 'Sena', 'anaclarasenanunez@gmail.com', crypt('Ana0411!', gen_salt('bf')), 'admin'),
-          ('Juan', 'Pérez', 'juan@correo.com', crypt('28DESeptiembre2024!', gen_salt('bf')), 'user'),
-          ('Martin', 'Martinez', 'mm@correo.com', crypt('28DESeptiembre2024!', gen_salt('bf')), 'user'),
-          ('Jose', 'Gutierrez', 'jg@correo.com', crypt('28DESeptiembre2024!', gen_salt('bf')), 'user');
+insert into users (name, lastname, email, password, role, city)
+    values('Nicolás', 'Márquez', 'nicomars270@gmail.com', crypt('27DEenero2003_', gen_salt('bf')), 'admin', 'Salto'),
+          ('Martina', 'Guzmán', 'martina14288@gmail.com', crypt('28DEenero2003_', gen_salt('bf')), 'admin', 'Salto'),
+          ('Ana', 'Sena', 'anaclarasenanunez@gmail.com', crypt('Ana0411!', gen_salt('bf')), 'admin', 'Montevideo'),
+          ('Juan', 'Pérez', 'juan@correo.com', crypt('28DESeptiembre2024!', gen_salt('bf')), 'user', 'Soriano'),
+          ('Martin', 'Martinez', 'mm@correo.com', crypt('28DESeptiembre2024!', gen_salt('bf')), 'user', 'Paysandú'),
+          ('Jose', 'Gutierrez', 'jg@correo.com', crypt('28DESeptiembre2024!', gen_salt('bf')), 'user', 'Cerro Largo');
 
 insert into properties (title, description, price, departamento, barrio, number_of_rooms, number_of_bathrooms, main_img_url, contact_data, property_type)
     values('Casa en Punta del Este', 'Casa en Punta del Este con vista al mar', 100000, 'Maldonado', 'Punta del Este', 3, 2, 'https://www.lacasadelbosque.com.uy/assets/images/la-casa-del-bosque-2019-20-1320x880.jpg', '091234567', 'Casa'),
@@ -91,4 +92,7 @@ insert into properties (title, description, price, departamento, barrio, number_
           ('Casa en Colonia', 'Casa en Colonia con vista al parque', 120000, 'Colonia', 'Centro', 3, 2, 'https://cf.bstatic.com/xdata/images/hotel/max1024x768/194495367.jpg?k=4c39a2aa5ca9e9a3d48e599ddec28a68a007adbd3aed5462530da3c307d2ce3f&o=&hp=1', '091234567', 'Casa'),
           ('Apartamento en Soriano', 'Apartamento en Soriano con vista al río', 90000, 'Soriano', 'Centro', 2, 1, 'https://www.inmobiliariaya.com/fotos/1/424/49778/448056010801978.jpg', '091234567', 'Apartamento'),
           ('Casa en Río Negro', 'Casa en Río Negro con vista al parque', 130000, 'Río Negro', 'Centro', 3, 2, 'https://http2.mlstatic.com/D_NQ_NP_2X_760396-MLU74881926620_032024-O.webp', '091234567', 'Casa'),
+          ('Apartamento en Salto', 'Apartamento en Salto con vista al río', 60000, 'Salto', 'Centro', 2, 1, 'https://ftp.rural-server.com/ofertas/images/OYrzVkwArd23i5qP.jpeg', '091234567', 'Apartamento'),
+          ('Apartamento en Salto', 'Apartamento en Salto con vista al río', 60000, 'Salto', 'Centro', 2, 1, 'https://ftp.rural-server.com/ofertas/images/OYrzVkwArd23i5qP.jpeg', '091234567', 'Apartamento'),
+          ('Apartamento en Salto', 'Apartamento en Salto con vista al río', 60000, 'Salto', 'Centro', 2, 1, 'https://ftp.rural-server.com/ofertas/images/OYrzVkwArd23i5qP.jpeg', '091234567', 'Apartamento'),
           ('Apartamento en Rocha', 'Apartamento en Rocha con vista al río', 95000, 'Rocha', 'Centro', 2, 1, 'https://http2.mlstatic.com/D_NQ_NP_2X_936801-MLU79696435161_102024-N.webp', '091234567', 'Apartamento');

@@ -1,0 +1,28 @@
+<ion-split-pane contentId="main-content" when="lg">
+  <ion-menu
+contentId="main-content"
+menuId="filterMenu"
+side="start"
+class="w-full lg:w-64">
+<app-filters
+  (filtrosAplicados)="aplicarFiltros($event)"
+>
+</app-filters>
+</ion-menu>
+
+<ion-router-outlet id="main-content">
+
+<div class="overflow-auto max-w-full h-screen mt-14 pb-16">
+  <ion-grid class="min-w-full pb-14">
+    <ion-row class="justify-center">
+      <ion-col
+        *ngFor="let property of this.properties"
+        class="w-full sm:max-w-[500px] md:max-w-[300px] min-w-[300px] max-h-[400px] min-h-[300px]"
+      >
+        <app-property-card [property]="property"></app-property-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</div>
+</ion-router-outlet>
+</ion-split-pane>
